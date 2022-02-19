@@ -1,0 +1,57 @@
+1.#! /bin/bash
+echo "enter a value"
+read  a
+echo "enter b value"
+read  b
+echo "enter c value"
+read  c
+
+2.#! /bin/bash
+echo "enter a value"
+read  a
+echo "enter b value"
+read  b
+echo "enter c value"
+read  c
+
+f=$(($a+$b*$c))
+
+echo $f
+
+3.#! /bin/bash
+echo "enter a value "
+read  a
+echo "enter b value "
+read  b
+echo "enter c value "
+read  c
+
+s=$(($a*$b+$c))
+
+echo $s
+
+4.#! /bin/bash
+echo "enter a value "
+read  a
+echo "enter b value "
+read  b
+echo "enter c value "
+read  c
+
+t=$(($c+$a/b))
+
+echo $t
+
+
+5.
+#! /bin/bash
+echo "enter a value "
+read  a
+echo "enter b value "
+read  b
+echo "enter c value "
+read  c
+
+fourth=$(($a%$b+$c))
+
+echo $fourth

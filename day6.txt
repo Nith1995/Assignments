@@ -1,0 +1,176 @@
+1.# print a table of the powers of 2 that are less than or equal to 2^n till 256
+
+a=$1
+
+if [ $1 -gt 8 ];
+then
+	a=8
+fi
+
+i=1
+
+while [ $i -le $a ]
+do
+	echo $((2**$i))
+	((i++))
+done
+2.harmonic.sh
+# prints the nth harmonic number
+
+h=0
+for i in $( seq 1 $1 );
+do
+        x=`echo $i | awk '{print 1/$i}'`
+        h=`echo $h $x | awk '{print ($1 + $2)}'`
+done
+echo $h
+3.Number is prime
+# a program that takes a input and determines if the number is a prime
+
+factors=0
+read -p "Enter the number to be checked: " n
+
+for i in $( seq 2 $(($n-1)));
+do
+        if [ $(($n%$i)) -eq 0 ];
+        then
+                factors+=1
+        fi
+done
+
+if [ $factors -eq 0 ];
+then
+        echo $n "is prime."
+else
+        echo $n "is not prime."
+fi
+
+4.# extension of prime numbers program
+
+read -p "Enter first number of the range: " a
+read -p "Enter second number of the range: " b
+
+for n in $( seq $a $b );
+do
+        factors=0
+        for i in $( seq 2 $(($n-1)));
+        do
+                if [ $(($n%$i)) -eq 0 ];
+                then
+                        factors+=1
+                fi
+        done
+
+        if [ $factors -eq 0 ];
+        then
+                echo $n "is prime."
+        else
+                echo $n "is not prime."
+        fi
+done
+
+5.
+read -p "Enter a number: " n
+
+m=$n
+
+for i in $(seq 1 $(($n-1)));
+do
+        m=$(($m*$i))
+done
+
+echo $n"! = "$m
+6.# find the magic number
+
+comp=""
+echo "Think of a number between 1-100"
+read -p "Is your number greater than, less than or equal to 50? (g/l/e): " comp
+
+ans=50
+up=100
+lo=0
+
+while [ $comp != "e" ];
+do
+        if [ $comp = "g" ];
+        then
+		lo=$ans
+                if [ $(($ans%2)) -eq 0 ] && [ $(($up%2)) -eq 0 ];
+                then
+                	ans=$((($up+$ans)/2))
+		elif [ $(($ans%2)) -eq 0 ] && [ $(($up%2)) -eq 0 ];
+                then
+                        ans=$((($up+$ans)/2))
+		else
+			ans=$((($up+$ans+1)/2))
+		fi
+	elif [ $comp = "l" ];
+	then
+		up=$ans
+		if [ $(($ans%2)) -eq 0 ] && [ $(($lo%2)) -eq 0 ];
+                then
+                        ans=$((($ans+$lo)/2))
+                elif [ $(($ans%2)) -ne 0 ] && [ $(($lo%2)) -ne 0 ];
+		then
+			ans=$((($ans+$lo)/2))
+		else
+                        ans=$((($ans+$lo+1)/2))
+		fi
+	fi
+	read -p "Is your number greater than, less than or equal to "$ans"? (g/l/e): " comp
+done
+
+echo "Your magic number is, " $ans"."
+
+7.# Extend the Flip Coin problem till either Heads or Tails wins 11 times
+
+echo "Flipping the coin."
+
+echo ""
+
+score_h=0
+score_t=0
+
+while [ $score_h -lt 11 ] && [ $score_t -lt 11 ];
+do
+
+        flip=$((RANDOM%2))
+
+        if [ $flip -eq 0 ];
+        then
+                score_h=$(($score_h + 1))
+                echo "Heads."
+        else
+                score_t=$(($score_t + 1))
+                echo "Tails."
+        fi
+
+        echo "Heads = " $score_h
+        echo "Tails = " $score_t
+        echo ""
+done
+7. Gambler
+money=100
+wins=0
+rounds=0
+while [[ $money -ne 200 && $money -ne 0 ]];
+do
+	gamble=$((RANDOM%2))
+	rounds=$(( $rounds + 1 ))
+	if [ $gamble -eq 0 ];
+	then
+		money=$(( $money - 1 ))
+	else
+		money=$(( $money + 1 ))
+		win=$(( $win +1 ))
+	fi
+done
+
+if [ $money -eq 200 ];
+then
+	echo "He reached 200."
+else
+	echo "He lost all money."
+fi
+echo "No. of wins :" $win
+echo "No of rounds :" $rounds
